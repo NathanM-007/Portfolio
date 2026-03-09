@@ -20,7 +20,7 @@ html {
     rgba(148, 187, 233, 1) 100%
   );
 
-  background-size: 200% 200%; /* important */
+  background-size: 200% 200%;
   animation: gradientMove 12s ease infinite;
 }
 @keyframes gradientMove {
@@ -62,7 +62,7 @@ html {
 
 #skills,
 #projects {
-  scroll-margin-top: 73px; /* height of your navbar */
+  scroll-margin-top: 73px; 
 }
 .section {
   padding:10px;
@@ -91,7 +91,7 @@ color:white;
 
 #skills,
 #projects {
-  scroll-margin-top: 30px; /* height of your navbar */
+  scroll-margin-top: 30px; 
 }
 
 .element-selector {
@@ -127,7 +127,7 @@ color:white;
     rgba(148, 187, 233, 1) 100%
   );
 
-  background-size: 200% 200%; /* important */
+  background-size: 200% 200%; 
   animation: gradientMove 12s ease infinite;
 }
 @keyframes gradientMove {

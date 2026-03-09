@@ -20,14 +20,12 @@
     background: #833AB4;
     background: linear-gradient(315deg, rgb(207, 40, 86) 0%, rgba(253, 29, 29, 1) 18%, rgba(252, 176, 69, 1) 65%);
 }
-
 #medium {
     align-self: center;
     margin-top: -40px;
     background: #833AB4;
     background: linear-gradient(315deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
-
 #low {
     align-self: flex-end;
     margin-top: -40px;
@@ -37,8 +35,8 @@
 
 
 .skill-group p {
-    font-weight: 700; /* a bit bolder */
-    font-size: 28px;  /* slightly larger */
+    font-weight: 700; 
+    font-size: 28px;  
     text-align: center;
     margin-bottom: 25px;
     letter-spacing: 1px;
@@ -98,7 +96,7 @@
     color:white;
 }
 .skill-group p {
-    font-size: 18px;  /* slightly larger */
+    font-size: 18px; 
     text-align: center;
     margin-bottom: 10px;
     letter-spacing: 1px;
