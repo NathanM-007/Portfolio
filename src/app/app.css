@@ -1,0 +1,156 @@
+
+html {
+  scroll-behavior: smooth;
+}
+    /*  nav bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #111;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-evenly;
+  z-index: 1000;
+  border: 2px solid black;
+
+  background: linear-gradient(
+    162deg,
+    rgba(242, 199, 218, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+
+  background-size: 200% 200%; /* important */
+  animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+
+  
+}
+.navbar button {
+  background: whitesmoke;
+  border: 1px snow;
+  color: black;
+  font-size:25px;
+  cursor: pointer;
+ transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+ border-radius: 10px;
+  padding:10px;
+  opacity: 0.8;
+}
+.navbar button:hover {
+ transform: scale(1.2);
+ opacity: 1;
+}
+
+    /*  hero section    */
+#hero{
+    border: grey 3px solid;
+}
+#img {
+  width: 90%;
+  max-width: 1355px;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative;
+  left: 16%;
+}
+
+#skills,
+#projects {
+  scroll-margin-top: 73px; /* height of your navbar */
+}
+.section {
+  padding:10px;
+}
+
+#skills{
+  background: rgba(46, 1, 1, 0.966);
+  color:white;
+}
+
+#projects{
+background: 
+linear-gradient(
+    160deg,
+    #1a0000 0%,
+    rgba(46, 1, 1, 0.966) 40%,
+    #7a2f2f 100%
+);
+color:white;
+}
+
+
+
+    /*Mobile*/
+@media (max-width: 480px) {
+
+#skills,
+#projects {
+  scroll-margin-top: 30px; /* height of your navbar */
+}
+
+.element-selector {
+  scrollbar-width: none;
+    overflow: hidden;
+
+}
+
+#img {
+  width: 90%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+  margin: auto;
+  position: relative; 
+  left:5%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 99%;
+  background: #111;
+  padding: 5px 5px;
+  display: flex;
+  justify-content: space-evenly;
+  z-index: 1000;
+  border: 1px solid black;
+
+  background: linear-gradient(
+    162deg,
+    rgba(242, 199, 218, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+
+  background-size: 200% 200%; /* important */
+  animation: gradientMove 12s ease infinite;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+  .navbar button {
+    background: whitesmoke;
+    border: 1px snow;
+    color: black;
+    font-size:15px;
+    cursor: pointer;
+    transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+    border-radius: 10px;
+    padding:4px;
+    opacity: 0.8;
+  }
+.navbar button:hover {
+ transform: scale(1.1);
+ opacity: 1;
+}
+
+  
+
+}
