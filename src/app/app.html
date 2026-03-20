@@ -1,19 +1,74 @@
 <nav class="navbar">
-  <button (click)="scrollTo('skills')">Skills</button>
-  <button (click)="scrollTo('projects')">Projects</button>
+    <!--Right side-->
+  <button class="logo" (click)="scrollTo('hero')">Nathan</button>
+    <!--Left side-->
+  <div class="nav-links">
+    <button (click)="scrollTo('skills')">Skills</button>
+    <button (click)="scrollTo('projects')">Projects</button>
+    <button (click)="scrollTo('contact')">Contact</button>
+  </div>
 </nav>
+    <!--Background wave-->
+<app-waves></app-waves>
 
-<div id="hero">
-  <img id="img" src="assets/images/hero.png" />
-  <app-hero></app-hero>
+    <!--Right side Drag section-->
+<div 
+  id="scrollBar"
+  (mousedown)="startDrag($event)"
+  (mouseenter)="hoverStart()"
+  (mouseleave)="hoverEnd()"
+>
+
+
+    
+  <div class="blob" id="blob">
+        <span id="sectionLabel">Hero</span>
+    <!--Face-->
+    <svg #faceSVG viewBox="0 0 100 100">
+        <!--head-->
+          <circle cx="50" cy="50" r="48" fill="#5ec6b7" stroke="#2a8f87" stroke-width="3"/>
+        <!--open eyes-->
+          <g id="openEyes" style="display:none;">
+            <circle cx="35" cy="42" r="10" fill="black"/>
+            <circle cx="65" cy="42" r="10" fill="black"/>
+            <circle #pupilLeft cx="35" cy="42" r="4" fill="white"/>
+            <circle #pupilRight cx="65" cy="42" r="4" fill="white"/>
+          </g>
+      <!--closed eyes-->
+          <g id="closedEyes">
+            <path d="M25 42 Q35 48 45 42" stroke="black" stroke-width="4" fill="none"/>
+            <path d="M55 42 Q65 48 75 42" stroke="black" stroke-width="4" fill="none"/>
+          </g>
+    </svg>
+    <!------------------->
+
+    <!--Water-->
+      <dotlottie-wc
+        id="water"
+        src="https://lottie.host/945c2358-7ccc-43d3-a1a2-0895e9ca8fde/nxzu92pa9s.lottie"
+        autoplay
+        loop>
+      </dotlottie-wc>
+    <!------------------->
+
+  </div>
+
 </div>
 
+<section id="hero" >
+  <app-hero></app-hero>
+</section>
 
-<section id="skills" class="section">
+<section id="skills" class="section zoom-section">
     <app-skills></app-skills>
 </section>
 
-
-<section id="projects" class="section">
+<section id="projects" class="section zoom-section">
       <app-projects></app-projects>
 </section>
+
+<section id="contact"  class="zoom-section">
+      <app-contact></app-contact>
+</section>
+
+

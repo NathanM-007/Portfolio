@@ -1,9 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-    background-color: #FFFFF5;
-    color: black;
-}
 html, body {
-  margin: 0;
   height: 100%;
+  margin: 0;       
+  scrollbar-width: none; 
 }
+
+
+
+body {
+  margin: 0;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+}
+  
