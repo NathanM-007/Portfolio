@@ -1,12 +1,15 @@
 <nav class="navbar">
+  
     <!--Right side-->
-  <button class="logo" (click)="scrollTo('hero')">Nathan</button>
+  <a href="#hero" class="logo">Nathan</a>
+
     <!--Left side-->
   <div class="nav-links">
-    <button (click)="scrollTo('skills')">Skills</button>
-    <button (click)="scrollTo('projects')">Projects</button>
-    <button (click)="scrollTo('contact')">Contact</button>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </div>
+
 </nav>
     <!--Background wave-->
 <app-waves></app-waves>
@@ -19,7 +22,7 @@
   (mouseleave)="hoverEnd()"
 >
 
-
+  <div class="background"></div>
     
   <div class="blob" id="blob">
         <span id="sectionLabel">Hero</span>

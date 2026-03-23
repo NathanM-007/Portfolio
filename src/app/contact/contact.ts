@@ -15,6 +15,13 @@ export class ContactComponent {
     const email = (document.getElementById('EmailInput') as HTMLInputElement).value;
     const message = (document.getElementById('MgsInput') as HTMLTextAreaElement).value;
 
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
     const templateParams = {
       from_email: email,
       message: message

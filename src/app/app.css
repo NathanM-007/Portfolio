@@ -31,12 +31,14 @@ body.dragging * {
 
     /*left side*/
 .logo  {
-  font-size: 25px!important;
-  font-weight: 1000!important;
+  font-size: 25px;
+  font-weight: 1000;
   color: white;
   background: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
+  opacity: 0.8;
 }
 
     /*right side*/
@@ -44,23 +46,23 @@ body.dragging * {
   display: flex;
   gap: 25px;
 }
-
     /*buttons*/
-.navbar button {
+.nav-links a {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
+  color: rgba(220, 190, 255, 0.8);
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   padding: 8px 12px;
   transition: all 0.25s ease;
+  text-decoration: none;
 }
-  .navbar button:hover {
+  .nav-links a:hover {
     color: white;
     transform: translateY(-2px);
   }
-  .navbar button:active {
+  .nav-links a:active {
     transform: scale(0.95);
   }
 /*------------------*/
@@ -102,6 +104,8 @@ body.dragging * {
   align-items:center;
   justify-content:center;
   transition: transform 0.15s ease;
+  position: relative;
+  z-index: 2;
 }
   body.dragging .blob {
     transform: scale(1.25) rotate(8deg);
@@ -145,26 +149,47 @@ body.dragging #scrollBar .blob svg {
     cursor: grabbing;
   }
 
+    /* bacground div */
+.background {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.15);
+  z-index: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+  #scrollBar:hover .background {
+    opacity: 1;
+    width: 220px; 
+  box-shadow: 0 10px 30px rgba(94, 198, 183, 0.25);
+  }
+
+    /* section label text */
 #sectionLabel {
   position: absolute;
-  right: 140px;             
+  right: 110px;             
   top: 50%;
   transform: translateY(-50%) translateX(10px);
-  
-  font-size: 13px;
-  color: white;
+  font-size: 20px;
   white-space: nowrap;
-
+  z-index: 2;
   opacity: 0;
   transition: all 0.25s ease;
   pointer-events: none;
+  color: #00F2FF;
 }
+  #scrollBar:hover #sectionLabel {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0); 
+  }
 
-/* show on hover */
-#scrollBar:hover #sectionLabel {
-  opacity: 1;
-  transform: translateY(-50%) translateX(0); 
-}
 
 
 /*   -------------------------     */

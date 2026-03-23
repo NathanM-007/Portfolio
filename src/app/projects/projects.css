@@ -82,6 +82,10 @@ body {
 }
 
 /* Title link */
+#Fish{
+   pointer-events: none;
+}
+
 .link {
   display: inline-block;
   color: #a78bfa;
@@ -91,14 +95,10 @@ body {
   margin-left: 5px;
   transition: color 0.2s ease, transform 0.2s ease;
 }
-#Fish{
-   pointer-events: none;
-}
-
-.link:hover {
-  color: #7dd3fc;
-  transform: translateX(3px);
-}
+  .link:hover {
+    color: #7dd3fc;
+    transform: translateX(3px);
+  }
 
 .img-wrapper {
   position: relative;
@@ -112,22 +112,21 @@ body {
 
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -10px;    
+    left: -10px;    
+    right: -10px;   
+    bottom: -10px;
     background: rgba(0, 0, 0, 0.6);
     color: white;
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:20px;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 .img-wrapper:hover .overlay {
-  opacity: 0.2;
+  opacity: 0.4;
 }
 
 

@@ -6,12 +6,12 @@
         <div id="VisitorsEmail">
 
             <label for="EmailInput" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="EmailInput" >
+            <input type="email" class="form-control" id="EmailInput" required email>
         </div>
 
         <div id="VisitorsMgs">
             <label for="MgsInput" class="form-label">Message</label>
-            <textarea  id="MgsInput" class="form-control" rows="3"></textarea>
+            <textarea  id="MgsInput" class="form-control" rows="3" required></textarea>
         </div>
 
         <button (click)="sendEmail()">Send!</button>
@@ -27,7 +27,13 @@
             <img src="assets/icons/gmail.png"/> nathan.martin1409@gmail.com
         </div>
        <div id="github">
-            <img src="assets/icons/github.png"/> <a href="https://github.com/NathanM-007">Github</a>
+            <img src="assets/icons/github.png"/> <a href="https://github.com/NathanM-007" target="_blank">Github</a>
+        </div>
+
+        <div id="CV">
+        <a href="assets/Nathan Martin CV.pdf" download>
+            <img src="assets/icons/CV.png" target="_blank"/> My CV
+        </a>
         </div>
 
     </div>

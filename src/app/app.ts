@@ -29,23 +29,7 @@ export class App implements AfterViewInit {
   lastVelocity = 0;
 
   //Scroll
-scrollTo(sectionId: string) {
-  const section = document.getElementById(sectionId);
 
-  if (section) {
-    const offset = 100;
-
-    const y =
-      section.getBoundingClientRect().top +
-      window.pageYOffset -
-      offset;
-
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-  }
-}
 
   //Dragging
 startDrag(event: MouseEvent) {
