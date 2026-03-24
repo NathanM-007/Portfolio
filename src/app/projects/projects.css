@@ -1,5 +1,5 @@
 body {
-  background: #0f172a; /* deep slate */
+  background: #0f172a;
   font-family: system-ui, sans-serif;
 }
 
@@ -67,7 +67,7 @@ body {
 .programs {
   display: flex;
   gap: 10px;
-  padding-left: 5px; /* slight alignment tweak */
+  padding-left: 5px; 
 }
 
 .programs img {

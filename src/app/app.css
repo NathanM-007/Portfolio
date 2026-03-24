@@ -2,8 +2,8 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  overflow: hidden;
   scrollbar-width: none; 
+    overflow-y: auto;
 }
 body::-webkit-scrollbar {
   display: none;       

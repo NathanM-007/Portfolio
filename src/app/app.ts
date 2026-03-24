@@ -157,6 +157,17 @@ showClosedEyes() {
     );
   }
 //--------------------------------------------
+  //Scroll behaviour
+scroll(id: string) {
+  setTimeout(() => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }, 0);
+}
+
+//--------------------------------------------
 
 
   //Sections fade in

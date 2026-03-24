@@ -32,7 +32,7 @@ export class ContactComponent {
         alert('Message sent!');
       }, (error) => {
         console.error(error);
-        alert('Failed to send message');
+        alert('Failed to send message!');
       });
   }
 

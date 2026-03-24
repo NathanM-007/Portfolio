@@ -1,14 +1,36 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  OnDestroy
+} from '@angular/core';
 import chroma from 'chroma-js';
+
+interface WaveSettings {
+  amplitudeX: number;
+  amplitudeY: number;
+  lines: number;
+  smoothness: number;
+  offsetX: number;
+  hueStartColor: number;
+  saturationStartColor: number;
+  lightnessStartColor: number;
+  hueEndColor: number;
+  saturationEndColor: number;
+  lightnessEndColor: number;
+  fill: boolean;
+  crazyness: number;
+  strokeWidth: number;
+}
 
 @Component({
   selector: 'app-waves',
   standalone: true,
   templateUrl: './waves.html',
   styleUrls: ['./waves.css']
-  
 })
-export class WavesComponent implements AfterViewInit {
+export class WavesComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('svg', { static: false }) svgRef?: ElementRef<SVGElement>;
 
@@ -19,104 +41,90 @@ export class WavesComponent implements AfterViewInit {
 
   Colors: string[] = [];
   Paths: Path[] = [];
-  overflow!: number;
+
+  overflow = 0;
   time = 0;
-  settings: any;
+  animationId!: number;
 
-    animate() {
+  settings!: WaveSettings;
 
-  this.time += 0.005;
-
-  this.Paths.forEach((path) => {
-
-    path.settings = this.settings;
-    path.time = this.time;
-
-    path.root = [];
-    path.createRoot();
-    path.updatePath();
-
-  });
-
-  requestAnimationFrame(() => this.animate());
-
-}
-  /* TOP SETTINGS */
-  topSettings = {
-    amplitudeX: 300,
-    amplitudeY: 100,
-    lines: 40,
-    smoothness: 3,
+  /* top wave */
+  topSettings: WaveSettings = {
+    amplitudeX: 270,
+    amplitudeY: 65,
+    lines: 25,
+    smoothness: 2.6,
     offsetX: -13,
-
     hueStartColor: 182,
     saturationStartColor: 100,
-    lightnessStartColor: 69,
-
+    lightnessStartColor: 70,
     hueEndColor: 261,
     saturationEndColor: 100,
-    lightnessEndColor: 59,
-
+    lightnessEndColor: 60,
     fill: false,
-    crazyness: 0.01,
-    strokeWidth: 1
+    crazyness: 0.02,
+    strokeWidth: 2
   };
 
-  /* BOTTOM SETTINGS */
-  bottomSettings = {
-    amplitudeX: 300,
-    amplitudeY: 36,
-    lines: 40,
+  /* bottom wave */
+  bottomSettings: WaveSettings = {
+    amplitudeX: 270,
+    amplitudeY: 65,
+    lines: 25,
     smoothness: 2.6,
-    offsetX: 20,
-
-    hueStartColor: 218,
+    offsetX: -10,
+    hueStartColor: 198,
     saturationStartColor: 100,
-    lightnessStartColor: 52,
-
-    hueEndColor: 350,
+    lightnessStartColor: 61,
+    hueEndColor: 281,
     saturationEndColor: 100,
-    lightnessEndColor: 62,
-
+    lightnessEndColor: 64,
     fill: false,
-    crazyness: 0.03,
-    strokeWidth: 3
+    crazyness: 0.02,
+    strokeWidth: 2
   };
 
-  /* INTERPOLATION */
+  /* ---------- animation ---------- */
+
+  animate() {
+    this.time += 0.005;
+
+    this.Paths.forEach((path) => {
+      path.time = this.time;
+      path.updatePath(); 
+    });
+
+    this.animationId = requestAnimationFrame(() => this.animate());
+  }
+
+  ngOnDestroy() {
+    cancelAnimationFrame(this.animationId);
+  }
+
+
   lerp(a: number, b: number, t: number) {
     return a + (b - a) * t;
   }
 
-  getInterpolatedSettings(t: number) {
-
+  getInterpolatedSettings(t: number): WaveSettings {
     const result: any = {};
 
     Object.keys(this.topSettings).forEach((key) => {
-
       const a = (this.topSettings as any)[key];
       const b = (this.bottomSettings as any)[key];
 
-      if (typeof a === 'number') {
-        result[key] = this.lerp(a, b, t);
-      } else {
-        result[key] = t > 0.5 ? b : a;
-      }
-
+      result[key] = typeof a === 'number' ? this.lerp(a, b, t) : (t > 0.5 ? b : a);
     });
 
     return result;
   }
 
+
   ngAfterViewInit() {
 
-    if (!this.svgRef) {
-      console.error("SVG not found");
-      return;
-    }
+    if (!this.svgRef) return;
 
     this.svg = this.svgRef.nativeElement;
-
     this.settings = this.topSettings;
 
     this.buildPaths();
@@ -132,20 +140,20 @@ export class WavesComponent implements AfterViewInit {
           const scrollTop = window.scrollY;
           const maxScroll = document.body.scrollHeight - window.innerHeight;
 
-          const progress = Math.min(scrollTop / maxScroll, 1);
+          const progress = maxScroll > 0
+            ? Math.min(scrollTop / maxScroll, 1)
+            : 0;
 
           this.settings = this.getInterpolatedSettings(progress);
 
-          this.updatePaths();
+          this.updateColorsOnly();
 
           ticking = false;
 
         });
 
         ticking = true;
-
       }
-     
     });
 
     window.addEventListener('resize', () => {
@@ -153,22 +161,23 @@ export class WavesComponent implements AfterViewInit {
       this.winW = window.innerWidth;
       this.winH = window.innerHeight;
 
-      this.svg.innerHTML = '';
-      this.buildPaths();
+      while (this.svg.firstChild) {
+        this.svg.removeChild(this.svg.firstChild);
+      }
 
+      this.buildPaths();
     });
- this.animate();
+
+    this.animate();
   }
+
 
   buildPaths() {
 
     this.overflow = Math.abs(this.settings.lines * this.settings.offsetX);
 
-    const startColor =
-      `hsl(${this.settings.hueStartColor}, ${this.settings.saturationStartColor}%, ${this.settings.lightnessStartColor}%)`;
-
-    const endColor =
-      `hsl(${this.settings.hueEndColor}, ${this.settings.saturationEndColor}%, ${this.settings.lightnessEndColor}%)`;
+    const startColor = `hsl(${this.settings.hueStartColor}, ${this.settings.saturationStartColor}%, ${this.settings.lightnessStartColor}%)`;
+    const endColor = `hsl(${this.settings.hueEndColor}, ${this.settings.saturationEndColor}%, ${this.settings.lightnessEndColor}%)`;
 
     this.Colors = chroma
       .scale([startColor, endColor])
@@ -194,47 +203,33 @@ export class WavesComponent implements AfterViewInit {
 
       this.Paths.push(path);
 
-      path.createRoot();
+      path.createRoot();  
       path.createPath();
-
     }
-
   }
 
-updatePaths() {
 
-  const startColor =
-    `hsl(${this.settings.hueStartColor}, ${this.settings.saturationStartColor}%, ${this.settings.lightnessStartColor}%)`;
+  updateColorsOnly() {
 
-  const endColor =
-    `hsl(${this.settings.hueEndColor}, ${this.settings.saturationEndColor}%, ${this.settings.lightnessEndColor}%)`;
+    const startColor = `hsl(${this.settings.hueStartColor}, ${this.settings.saturationStartColor}%, ${this.settings.lightnessStartColor}%)`;
+    const endColor = `hsl(${this.settings.hueEndColor}, ${this.settings.saturationEndColor}%, ${this.settings.lightnessEndColor}%)`;
 
-  this.Colors = chroma
-    .scale([startColor, endColor])
-    .mode('lch')
-    .colors(Math.round(this.settings.lines) + 2);
+    this.Colors = chroma
+      .scale([startColor, endColor])
+      .mode('lch')
+      .colors(Math.round(this.settings.lines) + 2);
 
-  this.Paths.forEach((path, i) => {
+    this.Paths.forEach((path, i) => {
+      path.settings = this.settings;
+      path.fill = this.Colors[i + 1];
 
-    path.settings = this.settings;
-    path.fill = this.Colors[i + 1];
-
-    path.path.setAttribute('stroke', path.fill);
-    path.path.setAttribute('stroke-width', this.settings.strokeWidth);
-    
-
-    path.root = [];
-
-    path.createRoot();
-    path.updatePath();
-
-  });
-
+      path.path.setAttribute('stroke', path.fill);
+      path.path.setAttribute('stroke-width', String(this.settings.strokeWidth)); 
+    });
+  }
 }
 
-}
-
-/* PATH CLASS */
+/* ---------- PATH CLASS ---------- */
 
 class Path {
 
@@ -246,7 +241,7 @@ class Path {
     public rootY: number,
     public fill: string,
     public offsetX: number,
-    public settings: any,
+    public settings: WaveSettings,
     public winW: number,
     public winH: number,
     public overflow: number,
@@ -256,24 +251,16 @@ class Path {
   createRoot() {
 
     let x = -this.overflow + this.offsetX;
-    let rootY = this.rootY;
 
-    this.root.push({ x, y: rootY });
+    this.root.push({ x, y: this.rootY });
 
     while (x < this.winW) {
-
       x += this.settings.amplitudeX;
 
-      let value = Math.sin(x * this.settings.crazyness + this.time) 
-
-      let y = this.settings.amplitudeY * value + rootY;
-
-      this.root.push({ x, y });
-
+      this.root.push({ x, y: this.rootY });
     }
 
-    this.root.push({ x: this.winW + this.overflow, y: rootY });
-
+    this.root.push({ x: this.winW + this.overflow, y: this.rootY });
   }
 
   createPath() {
@@ -285,14 +272,13 @@ class Path {
 
     this.path.setAttribute('fill', this.settings.fill ? this.fill : 'none');
     this.path.setAttribute('stroke', this.fill);
-    this.path.setAttribute('stroke-width', this.settings.strokeWidth);
+    this.path.setAttribute('stroke-width', String(this.settings.strokeWidth));
     this.path.setAttribute('stroke-linecap', 'round');
-    this.path.setAttribute('stroke-linejoin', 'round'); 
-
-    this.updatePath();
+    this.path.setAttribute('stroke-linejoin', 'round');
 
     this.svg.appendChild(this.path);
 
+    this.updatePath();
   }
 
   updatePath() {
@@ -302,23 +288,23 @@ class Path {
 
     for (let i = 1; i < this.root.length - 1; i++) {
 
-      let prev = this.root[i - 1];
-      let curr = this.root[i];
+      const prev = this.root[i - 1];
+      const curr = this.root[i];
 
-      let diffX = (curr.x - prev.x) / this.settings.smoothness;
+      const y1 = prev.y + Math.sin(prev.x * this.settings.crazyness + this.time + this.offsetX * 0.01) * this.settings.amplitudeY;
+      const y2 = curr.y + Math.sin(curr.x * this.settings.crazyness + this.time + this.offsetX * 0.01) * this.settings.amplitudeY;
 
-      let x1 = prev.x + diffX;
-      let x2 = curr.x - diffX;
+      const diffX = (curr.x - prev.x) / this.settings.smoothness;
 
-      d += `C ${x1} ${prev.y}, ${x2} ${curr.y}, ${curr.x} ${curr.y}`;
+      const x1 = prev.x + diffX;
+      const x2 = curr.x - diffX;
 
+      d += `C ${x1} ${y1}, ${x2} ${y2}, ${curr.x} ${y2}`;
     }
 
     d += ` L ${this.winW + this.overflow} ${this.winH + this.overflow}`;
     d += ` Z`;
 
     this.path.setAttribute('d', d);
-
   }
-
 }
