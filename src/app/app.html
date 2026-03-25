@@ -1,14 +1,19 @@
 <nav class="navbar">
   
-    <!--Right side-->
-  <a href="#hero" class="logo">Nathan</a>
-
     <!--Left side-->
-  <div class="nav-links">
+  <a (click)="scroll('hero')" class="logo">Nathan</a>
+
+    <!--Right side-->
+  <div class="nav-links" [class.active]="isOpen">
     <a (click)="scroll('skills')">Skills</a>
     <a (click)="scroll('projects')">Projects</a>
     <a (click)="scroll('contact')">Contact</a>
   </div>
+
+    <!-- Hamburger mobile only-->
+  <button class="menu-toggle" (click)="isOpen = !isOpen">
+    ☰
+  </button>   
 
 </nav>
     <!--Background wave-->

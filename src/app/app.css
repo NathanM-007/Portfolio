@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -43,8 +46,7 @@ body.dragging * {
 
     /*right side*/
 .nav-links {
-  display: flex;
-  gap: 25px;
+visibility: visible;
 }
     /*buttons*/
 .nav-links a {
@@ -65,6 +67,7 @@ body.dragging * {
   .nav-links a:active {
     transform: scale(0.95);
   }
+  
 /*------------------*/
 
 
@@ -210,9 +213,77 @@ body.dragging #scrollBar .blob svg {
   }
 /*------------------*/
 
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  
+}
 
 
-    /*Mobile*/
-@media (max-width: 480px) {
+
+/*--------------------------------------*/
+
+
+                                                           /*Mobile*/
+@media (max-width: 770px) {
+
+
+  
+/*--------------------------------------*/
+
+    /*  Sections */
+.section{
+  min-height:80vh;
+}
+
+
+/*--------------------------------------*/
+
+   /*  Nav  */
+  .menu-toggle {
+    display: block;
+  }
+
+    /*left side*/
+.logo  {
+  opacity: 0.8;
+}
+    /*right side*/
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+    width: 200px;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    display: none; 
+    padding: 20px;
+  }
+
+    /*buttons*/
+.nav-links a {
+    padding: 12px 0;
+    font-size: 16px;
+  }
+    .nav-links.active {
+      display: flex;
+  }
+  
+
+
+  /*Hiding blob*/
+  #scrollBar {
+    display: none;
+  }
+
+/*--------------------------------------*/
+
+
 }
 

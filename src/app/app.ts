@@ -11,8 +11,10 @@ import { WavesComponent } from './waves/waves';
   imports: [HeroComponent, SkillsComponent, ProjectsComponent, ContactComponent, WavesComponent,],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]  
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]  
 })
+
+
 
 export class App implements AfterViewInit {
 
@@ -23,10 +25,12 @@ export class App implements AfterViewInit {
   @ViewChild('pupilRight') pupilRight!: ElementRef<SVGCircleElement>;
   @ViewChild('faceSVG') face!: ElementRef<SVGSVGElement>;
 
+  
   idleTimer: any;
   eyesOpen = false;
   hovering = false;
   lastVelocity = 0;
+  isOpen = false;
 
   //Scroll
 

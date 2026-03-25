@@ -9,5 +9,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./hero.css']
 })
 export class HeroComponent  {
-
+      //scroll
+  scroll(id: string) {
+    setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 0);
+  }
 }

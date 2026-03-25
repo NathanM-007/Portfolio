@@ -113,8 +113,7 @@ button:active {
         flex-direction: column;
     }
 
-    #Contact {
-        border-right: none;
+    #Contact, #MyDetails {
         border-bottom: 2px solid #64d3ff;
     }
 }

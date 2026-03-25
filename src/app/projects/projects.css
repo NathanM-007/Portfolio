@@ -1,5 +1,4 @@
 body {
-  background: #0f172a;
   font-family: system-ui, sans-serif;
 }
 
@@ -11,7 +10,6 @@ body {
   width: 60%;
   margin: 30px auto;
   border: 1px solid rgba(255,255,255,0.05);
-
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -56,30 +54,28 @@ body {
   border: 1px solid rgba(255,255,255,0.06);
   gap: 12px;               
 }
-
-.text p {
-  font-size: 20px;
-  line-height: 1.6;
-  color: #e5e7eb;
-  margin: 0;
-}
+  .text p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #e5e7eb;
+    margin: 0;
+  }
 
 .programs {
   display: flex;
   gap: 10px;
   padding-left: 5px; 
+  justify-content: space-evenly;
 }
-
-.programs img {
-  width: 30px;
-  height: 30px;
-  padding: 6px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.programs img:hover {
-  transform: scale(1.15);
-}
+  .programs img {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .programs img:hover {
+    transform: scale(1.15);
+  }
 
 /* Title link */
 #Fish{
@@ -104,11 +100,9 @@ body {
   position: relative;
   display: inline-block;
 }
-
 .img-link {
   display: inline-block;
 }
-
 
 .overlay {
     position: absolute;
@@ -130,6 +124,39 @@ body {
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 770px) {
+
+.block {
+  width: 85%;
+  padding:3%;
+}
+
+.text p {
+  font-size: 18px;
+}
+
+.project {
+  width:10%;
+}
+
+.link {
+    font-size: 20px;
+    margin-left: -280px;       
+    text-align: center;   
+    display: block;   
+}
+
+.content img {
+  max-width: 350px;
+}
+
+.programs {
+  justify-content: space-evenly;
+}
+  .programs img {
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+  }
 
  }

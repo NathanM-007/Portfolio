@@ -28,12 +28,12 @@
     opacity:0;
     transform: translateY(60px);
 }
-.skill-group:hover{
-   transform: translateY(-4px);
-}
-.container.skills-visible .skill-group{
-  animation: skillReveal 0.8s ease forwards;
-}
+  .skill-group:hover{
+    transform: translateY(-4px);
+  }
+  .container.skills-visible .skill-group{
+    animation: skillReveal 0.8s ease forwards;
+  }
 
 @keyframes skillReveal {
   from{
@@ -76,10 +76,10 @@
     transition: all 0.25s ease;
     width:90px;
 }
-.icon:hover{
-    transform: translateY(-6px);
-    box-shadow:0 8px 18px rgba(0,0,0,0.2);
-}
+  .icon:hover{
+      transform: translateY(-6px);
+      box-shadow:0 8px 18px rgba(0,0,0,0.2);
+  }
 
 .icons{
     display:flex;
@@ -87,56 +87,46 @@
     flex-wrap:wrap;
     justify-content:center;
 }
-
-.icons img{
-    width:55px;
-    height:55px;
-    object-fit: contain;
-}
-
-.icon span{
-    margin-top:8px;
-    font-size:14px;
-    font-weight:500;
-    color:#111;
-}
+  .icons img{
+      width:55px;
+      height:55px;
+      object-fit: contain;
+  }
+  .icon span{
+      margin-top:8px;
+      font-size:14px;
+      font-weight:500;
+      color:#111;
+  }
 
 .icon img {
     transition: transform 0.2s ease;
 }
-
-.icon img:hover {
-    transform: scale(1.15);
-}
-
-
+  .icon img:hover {
+      transform: scale(1.15);
+  }
 
 
 .icons .icon{
   opacity:0;
   transform: translateY(20px);
 }
-
 .container.skills-visible .icon:nth-child(1){
   animation: iconReveal 0.5s ease forwards;
   animation-delay:0.4s;
 }
-
 .container.skills-visible .icon:nth-child(2){
   animation: iconReveal 0.5s ease forwards;
   animation-delay:0.5s;
 }
-
 .container.skills-visible .icon:nth-child(3){
   animation: iconReveal 0.5s ease forwards;
   animation-delay:0.6s;
 }
-
 .container.skills-visible .icon:nth-child(4){
   animation: iconReveal 0.5s ease forwards;
   animation-delay:0.7s;
 }
-
 @keyframes iconReveal{
   from{
     opacity:0;
@@ -147,8 +137,34 @@
     transform: translateY(0) scale(1);
   }
 }
-
 .icon:nth-child(1){ animation-delay:0.4s; }
 .icon:nth-child(2){ animation-delay:0.5s; }
 .icon:nth-child(3){ animation-delay:0.6s; }
 .icon:nth-child(4){ animation-delay:0.7s; }
+
+
+@media (max-width: 770px) {
+
+.skill-group{
+    padding:10px;
+    width:100%;
+}
+
+.icon{
+    padding:6px;
+}
+  .icons img{
+      width:46px;
+      height:46px;
+  }
+
+#high{
+    margin-right:0;
+}
+
+#low{
+    margin-left:0;
+}
+
+
+}
