@@ -117,3 +117,17 @@ button:active {
         border-bottom: 2px solid #64d3ff;
     }
 }
+
+@media (max-width: 500px) {
+
+    #MyDetails {
+        padding: 15px;
+    }
+
+    #MyDetails div {
+        margin-left: 0px;
+    }
+    #gmail{
+        font-size: 13px;
+    }
+}

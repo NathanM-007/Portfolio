@@ -166,5 +166,12 @@
     margin-left:0;
 }
 
+}
+
+
+@media (max-width: 500px) {
+.skill-group{
+     max-width: 350px;
+}
 
 }
